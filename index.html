@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Motivational Msg</title>
+    <style>
+        * { font-size: 40px; font-family: Calibri; }
+        body { background-color: lightyellow; }
+        h2 { border: solid; border-radius: 30px; width: 80%; }
+    </style>
+</head>
+<body onload="delayedDisplay()">
+    <center>
+        <h1>Motivational Msg</h1>
+        <h2 id="msg"></h2>
+        <h2 id="aut"></h2>
+        <script>
+            function delayedDisplay() {
+                setTimeout(displayQuote, 3000); // Delay by 3000 ms
+            }
+
+            function displayQuote() {
+                let aut = document.getElementById("aut");
+                let msg = document.getElementById("msg");
+                let url = "https://quotes-api-self.vercel.app/quote";
+                
+                fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    msg.innerHTML = data.quote;
+                    aut.innerHTML = data.author;
+                })
+                .catch(err => alert("Issue: " + err));
+            }
+        </script>
+    </center>
+</body>
+</html>
